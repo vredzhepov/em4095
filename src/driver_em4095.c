@@ -197,8 +197,9 @@ uint8_t em4095_irq_handler(em4095_handle_t *handle)
 
             return 1;                                                          /* return error */
         }
-        diff = (int64_t)(t.s - handle->last_time.s) * 1000000 +
-               (int64_t)(t.us - handle->last_time.us) ;                        /* now - last time */
+        diff = (int64_t)((int64_t)t.s - 
+               (int64_t)handle->last_time.s) * 1000000 +
+               (int64_t)((int64_t)t.us - (int64_t)handle->last_time.us);       /* now - last time */
         if (diff - (int64_t)200000L >= 0)                                      /* if over 1s, force reset */
         {
             handle->decode_len = 0;                                            /* reset the decode */
